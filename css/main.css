@@ -107,11 +107,11 @@ a:visited { color: #205caa; }
   margin-right: 10px
 }
 .footer-col-3 {
-  width: 500px; /*fallback*/
-  width: -webkit-calc(60.875%);
-  width: -moz-calc(60.875%);
-  width: -o-calc(60.875%);
-  width: calc(60.875%);
+  width: 335px; /*fallback*/
+  width: -webkit-calc(41.875%);
+  width: -moz-calc(41.875%);
+  width: -o-calc(41.875%);
+  width: calc(41.875%);
 }
 
 .site-footer ul { list-style: none; }
