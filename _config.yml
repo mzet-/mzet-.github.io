@@ -1,7 +1,16 @@
 name: mzet's stuff
-markdown: kramdown
-theme: minima
+baseurl: ""
 description: "Write an awesome description for your new site here. It will appear in your document head meta (for Google search results) and in your feed.xml site description."
 url: "https://mzet-.github.io/"
-permalink: /posts/:title
 github_username: mzet-
+
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
+kramdown:
+smart_quotes: ["apos", "apos", "quot", "quot"]
