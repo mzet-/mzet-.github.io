@@ -25,11 +25,11 @@ Orginally to achieve this, `linux-exploit-suggester.sh` was processing solely th
 
 So currently ...:
 
-1. Generating list based on kernel version
+### Generating list based on kernel version
 
-2. Checking for tags
+### Checking for tags
 
-3. Discarding exploits that are not applicable
+### Discarding exploits that are not applicable
 
 To further condense the canditate exploits list, additional set of requirements have been introduced to `les.sh`: now when adding the exploit to the tool, one can define additional conditions that are required to be met, for example:
 
@@ -46,6 +46,6 @@ For less typical checking, also the ability to run arbitrary Bash command(s) was
 
 In above scenario command `grep -qi ip_tables /proc/modules` is run to verify if `ip_tables` module is loaded (as this is required for the exploit to work).
 
-4. Sorting list based on dynamically generated rank
+### Sorting list based on dynamically generated rank
 
 ## Functionality
