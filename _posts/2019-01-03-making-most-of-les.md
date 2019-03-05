@@ -8,15 +8,15 @@ tags: [exploitation, priv_esc]
 
 Too often during the penetration testing drills/maneuvers and real-life engagements I observe peer operators just running `./les.sh` (without any parameters) then doing cursory analysis of results and moving forward to other testing techniques if none of the exploit stands out of from the crowd. Yet, the tool has much more to offer, then that. But first, let's do a little deep dive into how the `les.sh` works.
 
-## Under the hood
+Automating the process of selecting candidate exploits for the given Linux box is not an easy task. The major obstacles that makes it challenging endeavour are:
 
-Automating the process of selecting candidate exploits for the given Linux box is not an easy task. The major obstacles that makes it challenging andevor are:
-
-- practically every Linux distro I'm aware of has 
+- practically every Linux distro I'm aware of has dobule versioning
 - security fix backports
 - functionality backports
 
-That being said, to its job and handle many different Linux distributions `les.sh` has employed number of heuristic method(s) to achieve its main objectives: generate the list of candidate exploits for a given Linux box in the same time minimazing false postives and false negatives. Additionally - for the sake of practicallity and smooth maintenance - following assumptions has been made while implementing (and maintaining) the tool:
+## Under the hood
+
+That being said, to do its job and handle many different Linux distributions `les.sh` has employed number of heuristic method(s) to achieve its main objectives: generate the list of candidate exploits for a given Linux box in the same time minimazing false postives and false negatives. Additionally - for the sake of practicallity and smooth maintenance - following assumptions has been made while implementing (and maintaining) the tool:
 
 - 'tagging' subsystem (more on it later) focuses on server-based distros Deb, Ubuntu, RHEL/CentOS
 - userspace analysis subsytem focuses on server-based distros ...
@@ -33,7 +33,10 @@ So currently ...:
 
 To further condense the canditate exploits list, additional set of requirements have been introduced to `les.sh`: now when adding the exploit to the tool, one can define additional conditions that are required to be met, for example:
 
-    Reqs: pkg=linux-kernel,ver>=3.2,ver<=4.10.6,CONFIG_USER_NS=y,sysctl:kernel.unprivileged_userns_clone==1 
+```
+Reqs: pkg=linux-kernel,ver>=3.2,ver<=4.10.6,CONFIG_USER_NS=y, \
+sysctl:kernel.unprivileged_userns_clone==1 
+```
 
 Requirements set from above states that the kernel version needs to be > 3.2 and <= 4.10.6 but also kernel needs to have usernamespace fucntionality compiled in (`CONFIG_USER_NS=y`) and enabled (`sysctl:kernel.unprivileged_userns_clone==1`).
 
