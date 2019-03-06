@@ -32,11 +32,11 @@ So currently the approach, `les.sh` takes to generate list of candidate exploits
 
 See below for details of each step:
 
-**Generating list based on kernel version**
+#### Generating list based on kernel version
 
-**Checking for tags**
+#### Checking for tags
 
-**Discarding exploits that are not applicable**
+#### Discarding exploits that are not applicable
 
 To further condense the canditate exploits list, additional set of requirements have been introduced to `les.sh`: now when adding the exploit to the tool, one can define additional conditions that are required to be met, for example:
 
@@ -53,6 +53,6 @@ For less typical checking, also the ability to run arbitrary Bash command(s) was
 
 In above scenario command `grep -qi ip_tables /proc/modules` is run to verify if `ip_tables` module is loaded (as this is required for the exploit to work).
 
-**Sorting list based on dynamically generated rank**
+#### Sorting list based on dynamically generated rank
 
 ## Functionality
