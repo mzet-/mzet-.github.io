@@ -4,13 +4,13 @@ title: Making most of linux-exploit-suggester
 tags: [exploitation, priv_esc]
 ---
 
-[linux-exploit-suggester.sh](https://github.com/mzet-/linux-exploit-suggester) (commonly called just `les.sh`) implemented and maintained by me is the next generation version of the tool designed to assist in privilege escalation testing on Linux servers during the penetration testing.
+[linux-exploit-suggester.sh](https://github.com/mzet-/linux-exploit-suggester) (commonly called just `les.sh`) implemented and maintained by me is the next generation version of the tool designed to assist in privilege escalation testing on Linux servers during the penetration testing. In this post I will try to describe how it works and how to use it more effectively.
 
-Too often during the penetration testing drills/maneuvers and real-life engagements I observe peer operators just running `./les.sh` (without any parameters) then doing cursory analysis of results and moving forward to other testing techniques if none of the exploit stands out of from the crowd. Yet, the tool has much more to offer, then that. But first, let's do a little deep dive into how the `les.sh` works.
+Too often during the penetration testing engagements or testing drills/maneuvers I observe peer operators just running `./les.sh` (without any parameters) then doing cursory analysis of results and moving forward to other testing techniques if none of the exploit stands out from the crowd. Yet, the tool has much more to offer, then that. But first, let's do a little deep dive into how the `les.sh` actually works. It will help us understand how to use it more effectively.
 
 Automating the process of selecting candidate exploits for the given Linux box is not an easy task. The major obstacles that makes it challenging endeavour are:
 
-- practically every Linux distro I'm aware of has dobule versioning
+- practically every Linux distro I'm aware of has double versioning
 - security fix backports
 - functionality backports
 
@@ -23,13 +23,20 @@ That being said, to do its job and handle many different Linux distributions `le
 
 Orginally to achieve this, `linux-exploit-suggester.sh` was processing solely the vanilla kernel version, this approach was inherited from `les.sh` predecessor [Linux_Exploit_Suggester](https://github.com/InteliSecureLabs/Linux_Exploit_Suggester) script. However, this method wasn't very effective as it was susceptible to false positives problems, yielding the long list of exploits for manual analysis.
 
-So currently ...:
+So currently the approach, `les.sh` takes to generate list of candidate exploits looks like this:
 
-### Generating list based on kernel version
+1. Generating initial exploits list based on vanilla kernel version
+2. Checking for 'Tags' hits for every exploit
+3. Discarding exploits that are not applicable based on 'additional checks'
+4. Calculating internal metric ('Rank') for each exploit and sorting final list 
 
-### Checking for tags
+See below for details of each step:
 
-### Discarding exploits that are not applicable
+**Generating list based on kernel version**
+
+**Checking for tags**
+
+**Discarding exploits that are not applicable**
 
 To further condense the canditate exploits list, additional set of requirements have been introduced to `les.sh`: now when adding the exploit to the tool, one can define additional conditions that are required to be met, for example:
 
@@ -46,6 +53,6 @@ For less typical checking, also the ability to run arbitrary Bash command(s) was
 
 In above scenario command `grep -qi ip_tables /proc/modules` is run to verify if `ip_tables` module is loaded (as this is required for the exploit to work).
 
-### Sorting list based on dynamically generated rank
+**Sorting list based on dynamically generated rank**
 
 ## Functionality
