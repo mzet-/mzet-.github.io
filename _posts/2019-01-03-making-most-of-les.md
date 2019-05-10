@@ -4,7 +4,7 @@ title: Making most of linux-exploit-suggester
 tags: [exploitation, priv_esc]
 ---
 
-[linux-exploit-suggester.sh](https://github.com/mzet-/linux-exploit-suggester) (commonly called just `les.sh`) implemented and maintained by me is the next generation version of the tool designed to assist in privilege escalation testing on Linux servers during the penetration testing. In this post I will try to describe how it works and how to use it more effectively.
+[LES](https://github.com/mzet-/linux-exploit-suggester) security tool, developed and maintained by [Z-Labs]() is the next generation version of the tool designed to assist in privilege escalation testing on Linux servers during the penetration testing. In this post I will try to describe how it works and how to use it more effectively.
 
 Too often during the penetration testing engagements or testing drills/maneuvers I observe peer operators just running `./les.sh` (without any parameters) then doing cursory analysis of results and moving forward to other testing techniques if none of the exploit stands out from the crowd. Yet, the tool has much more to offer, then that. But first, let's do a little deep dive into how the `les.sh` actually works. It will help us understand how to use it more effectively.
 
@@ -56,3 +56,12 @@ In above scenario command `grep -qi ip_tables /proc/modules` is run to verify if
 #### Sorting list based on dynamically generated rank
 
 ## Functionality
+
+## Contributing
+
+LES is useful tool used by the security professionals around the globe during their red team/pentest engagements. To make it even better and more effective you can help in 4 ways:
+
+- Add newly published Linux privilege escalation exploits to it.
+- Test existing exploits on various Linux distributions with multiple kernel versions, then document your findings in a form of `Tags` in LES, e.g. of a tag: `ubuntu=12.04{kernel:3.(2|5).0-(23|29)-generic}` which states: `tagged exploit was verifed to work correctly on Ubuntu 12.04 with kernels: 3.2.0-23-generic, 3.2.0-29-generic, 3.5.0-23-generic and 3.5.0-29-generic;`. With this tag added LES will automatically highlight and bump dynamic `Rank` of the exploit when run on Ubuntu 12.04 with one of listed kernel versions. This will help you (and others) during pentests to rapidly identify critically vulnerable Linux machines.
+- Published exploits are often written only for PoC purposes only for one (or couple of) specific Linux distributions and/or kernel version(s). Pick sources of the exploit of choice and customize it to run on different kernel version(s). Then add your customized version of exploit as `ext-url` entry to LES and modify `Tags` to reflect newly added targets.
+- Conduct analysis of chosen kernel hardening security measure (add it to the `FEATURES` array) and publish your analysis at: `https://github.com/mzet-/les-res/blob/master/features/<feature-name>.md`
