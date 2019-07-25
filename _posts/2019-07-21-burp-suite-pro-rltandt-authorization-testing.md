@@ -14,10 +14,22 @@ There are bunch of Burp extensions for assisting in authorization testing but I 
 
 Let's consider typical web application that uses `Authorization: Bearer` token for request authentication purposes and it defines following types of users (i.e. permission levels):
 
-1) administrator user
-2) regular user
-3) guest (unauthenticated) user
+1. administrator user
+2. regular user
+3. guest (unauthenticated) user
 
 each user has other permission set and therefore can access other functionality and resources in the application. Site returns HTTP `401` in case of unauthorized access attempt. 
 
+To optimally configure AutoRepeater
+
 ![AutorRepeater defining replacement]({{ site.url }}/assets/autoRepeater1.png)
+
+
+At **#1** we prepare 3 tabs for every type of user we have: regular user, 2nd administrator user (the first administrator user is the one we will browse our target application) and guest user. At **#2** we're instructing the extension to replace value of `Authorization` header - we need to do this 3 times (for each user in different tab) providing the respective token value (for guest user we're setting empty value).Finally, at **#3** we're skipping "boring" requests to filter out noise.
+
+Now when we're browsing site as an administrator user (let's call him "Admin A user") AutoRepeater replays each and every request we have sent 3 times - for: regular user, admin B user and for the guest user - every time replacing value of `Authorization` header. This gives us nice, streamlined way to look for:
+
+1. vertical privileges escalation/authorization bypass (AutoRepeater attempts to access resources/functionality available for "Admin A user" using token of regular user and without any authorization token (guest user)
+2. limited horizontal authorization bypass (attempt to access "Admin A user" specific resources with admin's B token)
+
+in one pass thru the application. What would be left is looking for horizontal authorization bypass attempts from standpoint of given regular user to resource's of other regular user.
