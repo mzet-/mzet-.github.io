@@ -33,3 +33,5 @@ Now when we're browsing site as an administrator user (let's call him "Admin A u
 2. limited horizontal authorization bypass (attempt to access "Admin A user" specific resources with admin's B token)
 
 in one pass thru the application. What would be left is looking for horizontal authorization bypass attempts from standpoint of given regular user to resource's of other regular user.
+
+If you use (and want to share) any other cool tricks for testing for IDORs, let me ([@_mzet_)](https://twitter.com/_mzet_)) know.
