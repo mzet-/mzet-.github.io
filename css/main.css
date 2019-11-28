@@ -35,6 +35,13 @@ a:visited { color: #205caa; }
   zoom: 1;
 }
 
+.singlepost img {
+    padding: 20px 0px;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid 
+    #83161c;
+}
 
 /* Layout Styles */
 /* ----------------------------------------------------------*/
